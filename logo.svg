@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1018"/>
+      <stop offset="1" stop-color="#0e2f3a"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16c3a5"/>
+      <stop offset="1" stop-color="#1ee0bd"/>
+    </linearGradient>
+  </defs>
+  <!-- fondo redondeado -->
+  <rect width="256" height="256" rx="56" fill="url(#bg)"/>
+  <!-- anillo exterior -->
+  <circle cx="128" cy="128" r="92" fill="none" stroke="url(#acc)" stroke-width="6" opacity="0.55"/>
+  <!-- N estilizada (monograma) -->
+  <g transform="translate(78 70)" fill="url(#acc)">
+    <!-- pierna izquierda -->
+    <rect x="0" y="0" width="22" height="116" rx="5"/>
+    <!-- pierna derecha -->
+    <rect x="78" y="0" width="22" height="116" rx="5"/>
+    <!-- diagonal -->
+    <polygon points="0,0 22,0 100,116 78,116" />
+  </g>
+  <!-- punto teal accent -->
+  <circle cx="200" cy="180" r="9" fill="#1ee0bd"/>
+</svg>
