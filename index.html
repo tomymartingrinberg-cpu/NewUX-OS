@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NewUX OS — Distribución Linux desde LFS</title>
+  <meta name="description" content="NewUX OS: distribución GNU/Linux moderna construida desde Linux From Scratch, con XFCE, 3 kernels a elegir y gestor de paquetes propio." />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="stylesheet" href="style.css" />
+  <meta property="og:title" content="NewUX OS" />
+  <meta property="og:description" content="Distro Linux moderna basada en LFS, con experiencia desktop pulida." />
+  <meta property="og:image" content="assets/logo.png" />
+  <meta property="og:type" content="website" />
+</head>
+<body>
+  <div class="bg-mesh"></div>
+
+  <header class="hero">
+    <div class="container">
+      <img src="assets/logo.png" alt="NewUX OS" class="logo" />
+      <h1>NewUX OS</h1>
+      <p class="tagline">Una distribución Linux moderna, construida desde cero sobre LFS.</p>
+      <div class="badges">
+        <span class="badge">GPL v3</span>
+        <span class="badge">Linux From Scratch</span>
+        <span class="badge">XFCE 4.18</span>
+        <span class="badge">3 kernels</span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://github.com/tomymartingrinberg-cpu/NewUX-OS">Ver en GitHub</a>
+        <a class="btn btn-ghost" href="#quick-start">Quick start</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container section">
+      <h2>¿Qué es NewUX OS?</h2>
+      <p class="lead">
+        NewUX OS es una distribución GNU/Linux construida desde cero sobre
+        <a href="https://www.linuxfromscratch.org/" target="_blank" rel="noopener">Linux From Scratch</a>,
+        con foco en una experiencia de escritorio moderna, distintiva y simple.
+      </p>
+      <ul class="feature-list">
+        <li><strong>3 kernels</strong> a elegir desde GRUB: Mainline RC (7.1-rc5), Stable (7.0.10), LTS (6.18.33), más un modo Recovery.</li>
+        <li><strong>Ricing pro out-of-the-box</strong>: tema Greybird-Dark + Papirus-Dark + acento teal <code>#16c3a5</code>, fuentes Noto Sans + JetBrains Mono.</li>
+        <li><strong>pnu</strong> — gestor de paquetes universal con backends Flathub + AppImage + source-compile, API estilo apt/dnf.</li>
+        <li><strong>Instalador propio</strong> (Python GTK3) con flow particionado automático / alongside / cifrado LUKS.</li>
+        <li><strong>Repositorio de paquetes</strong> propio publicado en GitHub Pages.</li>
+      </ul>
+    </section>
+
+    <section class="container section">
+      <h2>Componentes del proyecto</h2>
+      <div class="repo-grid">
+        <a class="repo-card" href="https://github.com/tomymartingrinberg-cpu/NewUX-OS">
+          <h3>NewUX-OS</h3>
+          <p>Meta-repo: documentación, branding, roadmap.</p>
+        </a>
+        <a class="repo-card" href="https://github.com/tomymartingrinberg-cpu/newux-os-pnu">
+          <h3>newux-os-pnu</h3>
+          <p>Gestor de paquetes universal estilo apt/dnf, ~1.2k LOC bash.</p>
+        </a>
+        <a class="repo-card" href="https://github.com/tomymartingrinberg-cpu/newux-os-installer">
+          <h3>newux-os-installer</h3>
+          <p>Instalador GTK3 + wrapper de elevación + .desktop entry.</p>
+        </a>
+        <a class="repo-card" href="https://github.com/tomymartingrinberg-cpu/newux-os-ricing">
+          <h3>newux-os-ricing</h3>
+          <p>Configs XFCE, GTK CSS, wallpaper, theme de Calamares, script de aplicación.</p>
+        </a>
+        <a class="repo-card" href="https://github.com/tomymartingrinberg-cpu/pnu-packages">
+          <h3>pnu-packages</h3>
+          <p>Manifests YAML del repo oficial, servido en GitHub Pages.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h2>Especificaciones técnicas</h2>
+      <div class="spec-table">
+        <div><span>Base</span><span>LFS 12.x</span></div>
+        <div><span>Kernels</span><span>7.1-rc5 / 7.0.10 / 6.18.33</span></div>
+        <div><span>Bootloader</span><span>GRUB 2.12 (UEFI)</span></div>
+        <div><span>Init</span><span>systemd 256</span></div>
+        <div><span>WM</span><span>xfwm4 (XFCE 4.18+)</span></div>
+        <div><span>Display</span><span>Xorg + virtio-gpu KMS</span></div>
+        <div><span>Theme</span><span>Greybird-Dark + Papirus-Dark</span></div>
+        <div><span>Acento</span><span><code>#16c3a5</code></span></div>
+        <div><span>Fuentes</span><span>Noto Sans / JetBrains Mono</span></div>
+        <div><span>Paquetería</span><span>pnu (Flathub + AppImage + source)</span></div>
+        <div><span>Audio</span><span>PipeWire + WirePlumber</span></div>
+        <div><span>Toolchain</span><span>GCC 14.2 / glibc 2.40 / binutils 2.43</span></div>
+      </div>
+    </section>
+
+    <section id="quick-start" class="container section">
+      <h2>Quick start</h2>
+
+      <h3>Bootear NewUX OS en QEMU</h3>
+      <pre><code>qemu-system-x86_64 \
+  -enable-kvm -cpu host -m 4096 -smp 2 \
+  -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE_4M.fd \
+  -drive if=pflash,format=raw,file=OVMF_VARS_4M.fd \
+  -drive file=newux-os-1.0.qcow2,if=virtio,format=qcow2 \
+  -vga virtio -display gtk \
+  -device qemu-xhci -device usb-tablet -device usb-kbd</code></pre>
+
+      <h3>Instalar pnu sobre un sistema existente</h3>
+      <pre><code>sudo curl -sL https://raw.githubusercontent.com/tomymartingrinberg-cpu/newux-os-pnu/main/pnu \
+  -o /usr/local/bin/pnu &amp;&amp; sudo chmod +x /usr/local/bin/pnu
+sudo pnu update
+pnu search firefox</code></pre>
+    </section>
+
+    <section class="container section">
+      <h2>Paleta visual</h2>
+      <div class="palette">
+        <div class="swatch" style="background:#0a1018"><code>#0a1018</code><span>bg</span></div>
+        <div class="swatch" style="background:#1a1f2e"><code>#1a1f2e</code><span>surface</span></div>
+        <div class="swatch" style="background:#10131c"><code>#10131c</code><span>surface-deep</span></div>
+        <div class="swatch" style="background:#16c3a5;color:#06141a"><code>#16c3a5</code><span>accent</span></div>
+        <div class="swatch" style="background:#1ee0bd;color:#06141a"><code>#1ee0bd</code><span>accent-hi</span></div>
+        <div class="swatch" style="background:#e8ecef;color:#06141a"><code>#e8ecef</code><span>text</span></div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h2>Estado del proyecto</h2>
+      <p>NewUX OS es un proyecto experimental construido como ejercicio sobre LFS. <strong>No usar en producción.</strong></p>
+      <ul class="status-list">
+        <li class="ok">Boot UEFI con 3 kernels propios</li>
+        <li class="ok">XFCE con ricing pulido + instalador funcional sobre disco vacío</li>
+        <li class="ok">pnu instalando Flatpaks de Flathub y AppImages</li>
+        <li class="ok">Compilación in-tree de paquetes adicionales (CUPS, GnuPG, etc.)</li>
+        <li class="warn">Calamares 3.4.2 incluido pero con bug del plugin sfdisk-only — usar instalador Python</li>
+        <li class="warn">Wayland: kernel lo soporta pero el desktop default es Xorg</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        <strong>NewUX OS</strong> — GNU GPL v3 ·
+        <a href="https://github.com/tomymartingrinberg-cpu/NewUX-OS">GitHub</a> ·
+        <a href="https://www.gnu.org/licenses/gpl-3.0.txt">LICENSE</a>
+      </p>
+      <p class="muted">Autor: <a href="https://github.com/tomymartingrinberg-cpu">tomymartingrinberg-cpu</a></p>
+    </div>
+  </footer>
+</body>
+</html>
