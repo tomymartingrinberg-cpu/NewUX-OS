@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NewUX OS · Documentación</title>
+  <meta name="description" content="Documentación completa de NewUX OS — instalación, pnu, kernel, ricing, troubleshooting, FAQ." />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="pages.css" />
+  <meta name="theme-color" content="#0a1018" />
+</head>
+<body class="page-docs">
+  <div class="bg-mesh"></div>
+  <div class="bg-grid"></div>
+
+  <nav class="topbar">
+    <div class="container nav-row">
+      <a href="./" class="brand">
+        <img src="assets/logo.png" alt="" />
+        <span>NewUX OS</span>
+      </a>
+      <div class="nav-links">
+        <a href="./">Inicio</a>
+        <a href="docs.html" class="active">Docs</a>
+        <a href="discuss.html">Discuss</a>
+        <a href="rock.html" class="nav-rock"><span class="rock-dot"></span>NewUX Rock</a>
+        <a href="./#instalar" class="nav-cta">Instalar</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-layout">
+    <aside class="page-sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-head">
+          <span class="sidebar-eyebrow">Documentación · v1.0</span>
+          <input type="search" placeholder="Buscar en docs…" class="sidebar-search" oninput="filterToc(this.value)" />
+        </div>
+        <nav class="sidebar-toc">
+          <h4>Empezar</h4>
+          <a href="#quick-start">Quick Start</a>
+          <a href="#instalacion">Instalación</a>
+          <a href="#primer-arranque">Primer arranque</a>
+          <a href="#requisitos">Requisitos de sistema</a>
+
+          <h4>pnu — paquetes</h4>
+          <a href="#pnu-intro">Introducción</a>
+          <a href="#pnu-instalar">Instalar paquetes</a>
+          <a href="#pnu-actualizar">Actualizar</a>
+          <a href="#pnu-remover">Remover / autoremove</a>
+          <a href="#pnu-buscar">Buscar / info</a>
+          <a href="#pnu-flatpak">Backend Flatpak</a>
+          <a href="#pnu-appimage">Backend AppImage</a>
+          <a href="#pnu-source">Backend source-compile</a>
+          <a href="#pnu-repos">Repositorios</a>
+          <a href="#pnu-comandos">Referencia completa</a>
+
+          <h4>Kernel</h4>
+          <a href="#kernel-intro">Cómo NewUX maneja kernels</a>
+          <a href="#kernel-update">Auto-upgrade al último RC</a>
+          <a href="#kernel-cleanup">Cleanup automático</a>
+          <a href="#kernel-recovery">Modo Recovery</a>
+          <a href="#kernel-grub">Cambiar default en GRUB</a>
+
+          <h4>Ricing</h4>
+          <a href="#ricing-intro">Filosofía visual</a>
+          <a href="#ricing-aplicar">Aplicar el ricing</a>
+          <a href="#ricing-paleta">Paleta y tokens</a>
+          <a href="#ricing-atajos">Atajos custom</a>
+          <a href="#ricing-personalizar">Personalizar</a>
+
+          <h4>Avanzado</h4>
+          <a href="#instalador-flujo">Instalador internals</a>
+          <a href="#crear-repo">Crear repo propio</a>
+          <a href="#build-from-source">Build from source (LFS)</a>
+          <a href="#systemd-services">Services systemd</a>
+
+          <h4>Resolver problemas</h4>
+          <a href="#trouble-boot">No arranca</a>
+          <a href="#trouble-grafica">Problemas gráficos</a>
+          <a href="#trouble-red">Sin red</a>
+          <a href="#trouble-audio">Sin audio</a>
+          <a href="#trouble-instalador">Instalador falla</a>
+
+          <h4>Comunidad</h4>
+          <a href="#faq">FAQ</a>
+          <a href="#contribuir">Contribuir</a>
+          <a href="#changelog">Changelog</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="page-main docs-main">
+      <header class="docs-header">
+        <span class="eyebrow">Documentación oficial</span>
+        <h1>NewUX OS Docs</h1>
+        <p class="lead">Todo lo que necesitás para instalar, configurar, mantener y contribuir a NewUX OS. Si encontrás algo confuso o incompleto, abrí un PR — esta wiki es código en el repo.</p>
+        <div class="docs-meta">
+          <span>Última actualización: v1.0.0 · 2026-06</span>
+          <span>·</span>
+          <a href="https://github.com/tomymartingrinberg-cpu/NewUX-OS/edit/main/docs.html">Editar en GitHub</a>
+        </div>
+      </header>
+
+      <article class="docs-content">
+
+        <h2 id="quick-start">Quick Start</h2>
+        <p>Si querés simplemente probar NewUX OS en una VM, es 3 pasos:</p>
+        <ol class="step-list">
+          <li>Descargá la ISO desde <a href="https://gitlab.com/tomasmartingrinberg-cpu/NewUX-OS/-/releases/v1.0.0">GitLab Releases</a> (<code>newuxos_v1.iso</code>, 2.58 GiB).</li>
+          <li>Booteala en QEMU UEFI:
+<pre><code>qemu-system-x86_64 -enable-kvm -cpu host -m 4096 -smp 4 \
+  -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE_4M.fd \
+  -drive if=pflash,format=raw,file=OVMF_VARS_4M.fd \
+  -cdrom newuxos_v1.iso \
+  -vga virtio -display gtk</code></pre>
+          </li>
+          <li>En el menú GRUB, elegí <strong>NewUX OS Live</strong> y entrás al escritorio en ~20 segundos.</li>
+        </ol>
+
+        <div class="callout callout-info">
+          <strong>Probar sin compromiso:</strong> el modo Live no toca tu disco. Todo corre en RAM con overlayfs encima del squashfs. Para instalar al disco real desde la ISO live, abrí el icono <em>Instalar NewUX OS</em> del escritorio.
+        </div>
+
+        <h2 id="instalacion">Instalación</h2>
+        <p>Hay tres formas de poner NewUX OS en tu máquina:</p>
+
+        <h3>1. ISO Live → instalar al disco</h3>
+        <p>Es el flow recomendado para hardware físico:</p>
+        <ol>
+          <li>Grabá la ISO a un USB de 8 GiB+ con <code>dd</code>:
+<pre><code>sudo dd if=newuxos_v1.iso of=/dev/sdX bs=4M status=progress oflag=sync</code></pre>
+          </li>
+          <li>Booteá desde el USB (entrá al firmware UEFI con F2/F12/Del según tu motherboard).</li>
+          <li>Elegí "NewUX OS Live" en GRUB.</li>
+          <li>Cuando carga el escritorio, ejecutá el icono <em>Instalar NewUX OS</em>.</li>
+          <li>El instalador GTK3 te lleva por: idioma, disco, particionado, usuario, hostname, resumen, instalación, reboot.</li>
+        </ol>
+
+        <h3>2. Imagen booteable directa (.img.zst)</h3>
+        <p>Si ya tenés el disco preparado:</p>
+<pre><code>zstd -d newux-os-1.0.img.zst -o /tmp/newux.img
+sudo dd if=/tmp/newux.img of=/dev/sdX bs=4M status=progress oflag=sync</code></pre>
+        <p>Esto sobreescribe todo el disco destino con un NewUX OS funcional. Sin preguntar.</p>
+
+        <h3>3. Compilar desde cero (LFS)</h3>
+        <p>Para usuarios que quieren auditar/customizar cada paso. Ver <a href="#build-from-source">Build from source</a> abajo.</p>
+
+        <h2 id="primer-arranque">Primer arranque</h2>
+        <p>Después de instalar y reiniciar, NewUX OS te recibe con el greeter de LightDM. Ingresá con el usuario que creaste durante la instalación.</p>
+
+        <p>Una vez adentro vas a ver:</p>
+        <ul>
+          <li><strong>Top bar</strong> de 28px con menú aplicaciones (NewUX), windowmenu, systray, clock, botón de power.</li>
+          <li><strong>Dock inferior</strong> centrado con 8 launchers: appfinder, archivos (Thunar), terminal, firefox, libreoffice, gimp, krita, vlc.</li>
+          <li><strong>Wallpaper</strong> con gradiente navy-teal generado proceduralmente.</li>
+        </ul>
+
+        <p>Lo primero que conviene hacer:</p>
+<pre><code>sudo pnu update                          # refresca metadata de repos
+sudo pnu init-flatpak                    # configura Flathub si no está
+pnu doctor                               # diagnostica el sistema</code></pre>
+
+        <h2 id="requisitos">Requisitos de sistema</h2>
+        <table class="docs-table">
+          <thead><tr><th>Componente</th><th>Mínimo</th><th>Recomendado</th></tr></thead>
+          <tbody>
+            <tr><td>CPU</td><td>x86_64 (Intel/AMD 64-bit)</td><td>2+ cores, virtualización habilitada</td></tr>
+            <tr><td>RAM</td><td>1 GiB para live, 2 GiB instalado</td><td>4 GiB+</td></tr>
+            <tr><td>Disco</td><td>20 GiB (sistema base)</td><td>40 GiB+</td></tr>
+            <tr><td>Firmware</td><td>UEFI (BIOS legacy también soportado)</td><td>UEFI con secure boot deshabilitado</td></tr>
+            <tr><td>GPU</td><td>Cualquiera compatible con Xorg</td><td>Intel/AMD/NVIDIA con driver nouveau o propietario</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="pnu-intro">pnu — Packaging for NewUX Users</h2>
+        <p><code>pnu</code> es el gestor de paquetes universal de NewUX OS. Un solo binario bash (~1200 LOC) que unifica cuatro backends bajo una API estilo apt/dnf.</p>
+
+        <h2 id="pnu-instalar">Instalar paquetes</h2>
+        <p>El comando <code>pnu install</code> auto-detecta el backend según lo que le pases:</p>
+<pre><code>sudo pnu install firefox                       # busca en Flathub y repos NewUX
+sudo pnu install firefox vlc inkscape          # múltiples
+sudo pnu install --flatpak firefox             # forzar backend Flatpak
+sudo pnu install --appimage https://obsidian.md/Obsidian-1.5.0.AppImage
+sudo pnu install --source https://archive.gnome.org/gimp-2.10.36.tar.xz
+sudo pnu install ./local-package.AppImage      # path local
+sudo pnu install https://github.com/foo/bar.git  # git → source-compile</code></pre>
+
+        <h2 id="pnu-actualizar">Actualizar</h2>
+<pre><code>sudo pnu update                                # refresca metadata
+sudo pnu upgrade                               # actualiza TODO
+sudo pnu upgrade firefox                       # solo uno
+pnu list upgrades                              # qué se va a actualizar</code></pre>
+
+        <h2 id="pnu-remover">Remover paquetes</h2>
+<pre><code>sudo pnu remove firefox                        # desinstala (mantiene config user)
+sudo pnu purge firefox                         # desinstala + borra configs/cache
+sudo pnu autoremove                            # huérfanos de Flatpak runtimes</code></pre>
+
+        <h2 id="pnu-buscar">Buscar / info</h2>
+<pre><code>pnu search libreoffice                         # busca en todos los backends
+pnu info firefox                               # detalles: versión, source, deps, tamaño
+pnu list installed                             # qué tenés instalado
+pnu which /usr/bin/firefox                     # qué paquete provee X archivo
+pnu depends firefox                            # dependencias runtime
+pnu stats                                      # resumen de tu sistema</code></pre>
+
+        <h2 id="pnu-flatpak">Backend Flatpak (Flathub)</h2>
+        <p>Detecta <code>flatpak</code> automáticamente. <code>pnu install firefox</code> busca en Flathub primero (<code>org.mozilla.firefox</code>). Si falta <code>gpg</code> en el sistema, configura <code>--no-gpg-verify</code> automáticamente.</p>
+        <p>Para inicializar Flathub manualmente:</p>
+<pre><code>sudo pnu init-flatpak</code></pre>
+
+        <h2 id="pnu-appimage">Backend AppImage</h2>
+        <p>Descarga AppImages a <code>/opt/appimages/</code>, los hace ejecutables, genera un wrapper en <code>/usr/local/bin/</code> y extrae el <code>.desktop</code> interno para que aparezca en el menú.</p>
+<pre><code>sudo pnu install --appimage https://github.com/obsidianmd/obsidian-releases/releases/download/v1.5.0/Obsidian-1.5.0.AppImage
+sudo pnu install ./Obsidian-1.5.0.AppImage     # path local</code></pre>
+
+        <h2 id="pnu-source">Backend source-compile</h2>
+        <p>Auto-detecta el sistema de build:</p>
+        <table class="docs-table">
+          <thead><tr><th>Si encuentra</th><th>Usa</th></tr></thead>
+          <tbody>
+            <tr><td><code>meson.build</code></td><td><code>meson setup build &amp;&amp; ninja install</code></td></tr>
+            <tr><td><code>CMakeLists.txt</code></td><td><code>cmake -B build &amp;&amp; cmake --build build &amp;&amp; cmake --install build</code></td></tr>
+            <tr><td><code>configure</code> / <code>autogen.sh</code></td><td>autotools</td></tr>
+            <tr><td><code>Makefile</code></td><td><code>make &amp;&amp; make install</code></td></tr>
+          </tbody>
+        </table>
+        <p>Soporta <code>.tar.xz</code>, <code>.tar.gz</code>, <code>.tar.bz2</code>, y URLs git directas.</p>
+
+        <h2 id="pnu-repos">Repositorios</h2>
+        <p>Los manifests YAML del repo oficial NewUX viven en <a href="https://github.com/tomymartingrinberg-cpu/pnu-packages">pnu-packages</a> (también <a href="https://gitlab.com/tomasmartingrinberg-cpu/pnu-packages">en GitLab</a>).</p>
+<pre><code>pnu repos                                       # lista repos configurados
+sudo pnu repo-add nombre https://url/repo       # agregar uno
+sudo pnu repo-remove nombre                     # quitarlo
+sudo pnu update                                 # refrescar índices</code></pre>
+
+        <h2 id="pnu-comandos">Referencia completa</h2>
+        <table class="docs-table">
+          <thead><tr><th>Categoría</th><th>Comandos</th></tr></thead>
+          <tbody>
+            <tr><td>Paquetes</td><td><code>install</code>, <code>remove</code>, <code>purge</code>, <code>reinstall</code>, <code>autoremove</code>, <code>list</code>, <code>search</code>, <code>info</code>, <code>depends</code>, <code>which</code>, <code>download</code></td></tr>
+            <tr><td>Updates</td><td><code>update</code>, <code>upgrade</code>, <code>clean</code></td></tr>
+            <tr><td>Pin/Hold</td><td><code>pin</code>, <code>unpin</code></td></tr>
+            <tr><td>Kernels</td><td><code>update-kernel auto</code>, <code>update-kernel cleanup</code>, <code>update-kernel remove</code>, <code>update-kernel menu</code>, <code>update-kernel list</code>, <code>set-recovery</code>, <code>regen-grub</code></td></tr>
+            <tr><td>Repos</td><td><code>repo-add</code>, <code>repo-remove</code>, <code>repo-list</code></td></tr>
+            <tr><td>Sistema</td><td><code>doctor</code>, <code>history</code>, <code>stats</code>, <code>init-flatpak</code>, <code>self-update</code></td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="kernel-intro">Cómo NewUX maneja kernels</h2>
+        <p>NewUX OS shippea con tres ramas de kernel disponibles desde GRUB:</p>
+        <ul>
+          <li><strong>Mainline RC</strong> — la versión release-candidate más nueva (ej. <code>7.1-rc5</code>). Bleeding edge para hardware nuevo.</li>
+          <li><strong>Stable</strong> — la última release estable (ej. <code>7.0.10</code>).</li>
+          <li><strong>LTS</strong> — long-term support (ej. <code>6.18.33</code>). Más conservador.</li>
+        </ul>
+        <p>Más una entrada de <strong>Recovery</strong> que arranca en modo single-user con el kernel marcado en <code>/etc/pnu/recovery-kernel</code>.</p>
+
+        <h2 id="kernel-update">Auto-upgrade al último RC</h2>
+        <p>Una de las features estrella de pnu:</p>
+<pre><code>sudo pnu update-kernel                         # auto-upgrade mainline (default)
+sudo pnu update-kernel auto mainline           # explícito
+sudo pnu update-kernel auto lts                # upgrade rama LTS
+sudo pnu update-kernel auto stable             # upgrade rama Stable</code></pre>
+
+        <p>Flujo interno:</p>
+        <ol>
+          <li>Consulta <code>kernel.org/finger_banner</code> y como fallback hace <code>git ls-remote</code> a <code>https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git</code>.</li>
+          <li>Detecta la última versión disponible para la rama (incluyendo RCs como <code>7.2-rc6</code>).</li>
+          <li>Si hay versión nueva: descarga el tarball, copia el <code>.config</code> actual, fuerza flags VIRTIO/EXT4/SERIAL, <code>make olddefconfig</code>, compila con <code>make -j$(nproc)</code>, instala módulos.</li>
+          <li>Setea el nuevo kernel como default de GRUB.</li>
+          <li>Marca el kernel anterior de la misma rama en <code>/var/lib/pnu/pending_kernel_removal</code>.</li>
+        </ol>
+
+        <h2 id="kernel-cleanup">Cleanup automático post-reboot</h2>
+        <p>El service <code>pnu-cleanup-old-kernels.service</code> corre al boot siguiente, verifica que los kernels marcados <strong>no</strong> sean el running ni el recovery, y los elimina (<code>/boot/vmlinuz-*</code> + <code>/lib/modules/*</code> + config + System.map). Después regenera GRUB.</p>
+<pre><code>sudo systemctl enable pnu-cleanup-old-kernels.service     # activar
+sudo pnu update-kernel cleanup                            # forzar manual
+sudo pnu update-kernel remove 7.0.10                      # borrar específico</code></pre>
+
+        <h2 id="kernel-recovery">Modo Recovery</h2>
+        <p>El kernel marcado como recovery <strong>nunca se borra automáticamente</strong>. Para configurarlo:</p>
+<pre><code>sudo pnu set-recovery 6.18.33                  # marcar LTS como recovery
+cat /etc/pnu/recovery-kernel                   # ver cuál es</code></pre>
+
+        <h2 id="kernel-grub">Cambiar el kernel default en GRUB</h2>
+<pre><code>sudo pnu update-kernel menu                    # menú interactivo
+sudo pnu update-kernel mainline                # default = última mainline instalada
+sudo pnu update-kernel lts
+sudo pnu update-kernel stable
+pnu update-kernel list                         # lista instalados</code></pre>
+
+        <h2 id="ricing-intro">Filosofía visual</h2>
+        <p>El ricing de NewUX OS usa solo componentes XFCE estándar (sin whiskermenu, docklike, plank externos) para una experiencia tipo elementary/macOS:</p>
+        <ul>
+          <li>Top bar minimalista 28px dark transparente.</li>
+          <li>Dock inferior centrado (panel-2 con length=1).</li>
+          <li>Acento teal <code>#16c3a5</code> en buttons / focus / selection.</li>
+          <li>Wallpaper procedural navy-teal con mesh isométrico.</li>
+        </ul>
+
+        <h2 id="ricing-aplicar">Aplicar el ricing</h2>
+<pre><code>git clone https://github.com/tomymartingrinberg-cpu/newux-os-ricing
+cd newux-os-ricing
+sudo bash scripts/apply-ricing.sh
+
+# Recargar XFCE
+xfce4-panel -r &amp;
+xfdesktop --reload &amp;</code></pre>
+
+        <h2 id="ricing-paleta">Paleta y tokens CSS</h2>
+        <table class="docs-table">
+          <thead><tr><th>Token</th><th>Hex</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr><td><code>--bg</code></td><td><code>#0a1018 → #0e2f3a</code></td><td>Fondo navy con gradiente</td></tr>
+            <tr><td><code>--surface</code></td><td><code>#1a1f2e</code></td><td>Paneles, ventanas</td></tr>
+            <tr><td><code>--surface-deep</code></td><td><code>#10131c</code></td><td>Sidebar, dock</td></tr>
+            <tr><td><code>--surface-card</code></td><td><code>#232a3a</code></td><td>Entries, lists</td></tr>
+            <tr><td><code>--accent</code></td><td><code>#16c3a5</code></td><td>Botones, focus, current step</td></tr>
+            <tr><td><code>--accent-hi</code></td><td><code>#1ee0bd</code></td><td>Hover state</td></tr>
+            <tr><td><code>--text</code></td><td><code>#e8ecef</code></td><td>Texto principal</td></tr>
+            <tr><td><code>--text-dim</code></td><td><code>#97a3b0</code></td><td>Texto secundario</td></tr>
+            <tr><td><code>--border</code></td><td><code>#2d3548</code></td><td>Bordes sutiles</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="ricing-atajos">Atajos de teclado custom</h2>
+        <table class="docs-table">
+          <thead><tr><th>Tecla</th><th>Acción</th></tr></thead>
+          <tbody>
+            <tr><td><code>Super+E</code></td><td>Thunar (file manager)</td></tr>
+            <tr><td><code>Super+T</code></td><td>Terminal</td></tr>
+            <tr><td><code>Super+L</code></td><td>Lock screen</td></tr>
+            <tr><td><code>Super+R</code></td><td>App finder</td></tr>
+            <tr><td><code>Super+1..4</code></td><td>Cambiar workspace</td></tr>
+            <tr><td><code>Super+Up/Down/Left/Right</code></td><td>Maximize / Minimize / Tile</td></tr>
+            <tr><td><code>Super+D</code></td><td>Mostrar escritorio</td></tr>
+            <tr><td><code>Print</code></td><td>Screenshot</td></tr>
+            <tr><td><code>Ctrl+Alt+T</code></td><td>Terminal (fallback)</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="ricing-personalizar">Personalizar</h2>
+        <p>Los archivos de ricing se ubican en:</p>
+<pre><code>~/.config/xfce4/xfconf/xfce-perchannel-xml/   # config XFCE
+~/.config/gtk-3.0/gtk.css                     # CSS GTK custom
+~/.config/xfce4/terminal/terminalrc           # terminal
+/usr/share/backgrounds/newux/                 # wallpapers</code></pre>
+        <p>Para cambiar el acento, editá <code>~/.config/gtk-3.0/gtk.css</code> y reemplazá <code>@define-color newux_accent #16c3a5;</code> por tu color. Reiniciá las apps GTK para ver el cambio.</p>
+
+        <h2 id="instalador-flujo">Instalador internals</h2>
+        <p>El instalador (<code>install-newux-gui.py</code>) está escrito en Python 3 + GTK3, ~1100 LOC, con CSS embebido para el branding. Hace los siguientes pasos:</p>
+        <ol>
+          <li>Splash con logo y bienvenida.</li>
+          <li>Detecta discos con <code>lsblk</code> + <code>blkid</code>.</li>
+          <li>Ofrece particionado automático (EFI 512M + swap 2G + root resto), alongside o manual.</li>
+          <li>Opcional LUKS (requiere <code>cryptsetup</code> en el sistema live).</li>
+          <li>Pide nombre, username, password, hostname.</li>
+          <li>Resumen y confirmación.</li>
+          <li><code>rsync</code> del rootfs live al destino, chroot, <code>grub-install --removable</code>.</li>
+          <li>Listo, opción de reboot inmediato.</li>
+        </ol>
+
+        <h2 id="crear-repo">Crear tu propio repo pnu</h2>
+        <ol>
+          <li>Forkeá <a href="https://github.com/tomymartingrinberg-cpu/pnu-packages">pnu-packages</a> o creá un repo nuevo con la misma estructura.</li>
+          <li>Agregá manifests YAML en <code>packages/</code>:
+<pre><code>name: mi-app
+version: 1.2.3
+backend: appimage     # flatpak | appimage | source
+source: https://example.com/mi-app-1.2.3.AppImage
+maintainer: tu-usuario
+license: MIT
+categories: [Utility, Network]
+description: |
+  Descripción multi-línea.
+homepage: https://example.com</code></pre>
+          </li>
+          <li>Subí a GitHub Pages / Netlify / Cloudflare Pages.</li>
+          <li>El usuario lo agrega con <code>sudo pnu repo-add tunombre https://tu.url</code>.</li>
+        </ol>
+
+        <h2 id="build-from-source">Build from source (LFS)</h2>
+        <p>Para reproducir NewUX OS completa desde cero (~6-12 hs en hardware moderno):</p>
+<pre><code>git clone https://github.com/tomymartingrinberg-cpu/NewUX-OS-build-system
+cd NewUX-OS-build-system
+sudo ./setup.sh                              # prepara host (dependencias)
+sudo ./run-professional.sh                   # corre TODO el pipeline</code></pre>
+        <p>El pipeline genera primero el cross-toolchain, después LFS base, BLFS (Xorg, XFCE, audio), nuestros tres kernels custom y finalmente aplica el ricing y empaqueta.</p>
+        <p>Requisitos: 30+ GiB libres, 4+ GiB RAM, sudo, gcc 11+, make, git, wget.</p>
+
+        <h2 id="systemd-services">Services systemd de NewUX</h2>
+        <table class="docs-table">
+          <thead><tr><th>Service</th><th>Qué hace</th></tr></thead>
+          <tbody>
+            <tr><td><code>pnu-cleanup-old-kernels.service</code></td><td>Borra kernels marcados al boot</td></tr>
+            <tr><td><code>lightdm.service</code></td><td>Display manager</td></tr>
+            <tr><td><code>NetworkManager.service</code></td><td>Red (wired + WiFi)</td></tr>
+            <tr><td><code>pipewire.service</code> (user)</td><td>Audio</td></tr>
+            <tr><td><code>wireplumber.service</code> (user)</td><td>Session manager de PipeWire</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="trouble-boot">No arranca después de instalar</h2>
+        <p>Síntoma típico: kernel panic <code>VFS: Unable to mount root fs on unknown-block(0,0)</code>.</p>
+        <p><strong>Causa habitual:</strong> grub-mkconfig generó la entrada con <code>root=UUID=...</code> pero el initrd custom de NewUX espera <code>root=PARTUUID=...</code> (sin initramfs convencional).</p>
+        <p><strong>Fix manual:</strong> arrancá desde la ISO live, montá tu instalación, editá <code>/boot/grub/grub.cfg</code> en el disco, reemplazá <code>root=UUID=</code> por <code>root=PARTUUID=</code> (usá <code>blkid /dev/sdaX</code> para obtener el PARTUUID), y borrá la línea <code>initrd /boot/initrd.img.gz</code> si está.</p>
+
+        <h2 id="trouble-grafica">Problemas gráficos</h2>
+        <p>Si bootéa pero el escritorio no carga (pantalla negra, cursor X visible), probá:</p>
+        <ol>
+          <li>Editá la entrada GRUB (presioná <code>e</code>) y agregá <code>nomodeset</code> a la línea <code>linux</code>.</li>
+          <li>Si usás NVIDIA propietario y tenés glitch, instalá los drivers correctos con <code>sudo pnu install --source nvidia-driver-560</code>.</li>
+        </ol>
+
+        <h2 id="trouble-red">Sin red después de instalar</h2>
+        <p>NetworkManager debería arrancar por default. Verificá:</p>
+<pre><code>sudo systemctl status NetworkManager
+sudo systemctl enable --now NetworkManager
+nmcli device                                   # ver interfaces
+nmcli device wifi list                         # WiFi disponibles
+sudo nmcli device wifi connect "SSID" password "passwd"</code></pre>
+
+        <h2 id="trouble-audio">Sin audio</h2>
+<pre><code>systemctl --user status pipewire wireplumber
+systemctl --user enable --now pipewire wireplumber
+wpctl status                                   # estado WirePlumber</code></pre>
+
+        <h2 id="trouble-instalador">Instalador falla</h2>
+        <table class="docs-table">
+          <thead><tr><th>Error</th><th>Causa</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>"no se pudo crear tabla de particiones"</td><td>Bug Calamares con sfdisk 2.40</td><td>Usá <code>install-newux-gui.py</code> (Python) en su lugar</td></tr>
+            <tr><td>mkfs falla en re-intento</td><td>Mount stale</td><td>Reboot live, retry — el instalador ya hace <code>umount -R</code> al inicio</td></tr>
+            <tr><td>chpasswd corrupto silencioso</td><td>Password muy corta (1-2 chars)</td><td>Usá password de 4+ caracteres</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="faq">FAQ</h2>
+
+        <details class="faq-item">
+          <summary>¿Por qué basado en LFS y no en Debian / Arch / etc?</summary>
+          <p>Porque querés transparencia total sobre lo que corre en tu máquina. LFS te obliga a construir cada paquete a mano, así que el sistema final es <em>exactamente</em> lo que vos definiste. No hay capas heredadas de decisiones de upstream.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Es estable para uso diario?</summary>
+          <p>Es un proyecto experimental. Cosas básicas (browser, terminal, editor, gestión de archivos) funcionan bien. Pero todavía faltan piezas (Wayland, secure boot, hardening). No la pongas en producción de algo crítico.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Puedo instalar Steam / Wine / drivers NVIDIA?</summary>
+          <p>Sí, vía <code>pnu install --flatpak com.valvesoftware.Steam</code> o desde Flathub directamente. Wine también vía Flatpak. NVIDIA propietario hay que compilar from source porque el repo es legacy de LFS.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Hay versión live persistente?</summary>
+          <p>No por ahora — la ISO actual usa overlayfs tmpfs (cambios se pierden al reboot). Para persistencia, instalá al disco con el instalador GUI.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Soporta secure boot?</summary>
+          <p>No todavía — el kernel y módulos no están firmados. Está en el roadmap.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Cómo reporto un bug?</summary>
+          <p>Issues en GitHub: <a href="https://github.com/tomymartingrinberg-cpu/NewUX-OS/issues">github.com/tomymartingrinberg-cpu/NewUX-OS/issues</a>. Incluí: versión de NewUX OS, kernel running (<code>uname -r</code>), output de <code>pnu doctor</code>, pasos para reproducir.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Hay foro de comunidad?</summary>
+          <p>Sí — <a href="discuss.html">NewUX Discuss</a>. También GitHub Discussions del repo principal.</p>
+        </details>
+
+        <h2 id="contribuir">Contribuir</h2>
+        <p>Las contribuciones son bienvenidas. Áreas que necesitan ayuda ahora mismo:</p>
+        <ul>
+          <li><strong>Manifests pnu</strong> — agregar más paquetes al repo oficial (<a href="https://github.com/tomymartingrinberg-cpu/pnu-packages">pnu-packages</a>).</li>
+          <li><strong>Wayland</strong> — el kernel soporta DRM_VIRTIO_GPU pero el desktop default es Xorg.</li>
+          <li><strong>Hardening</strong> — apparmor / SELinux integration.</li>
+          <li><strong>Docs</strong> — traducciones, ejemplos, screencasts.</li>
+        </ul>
+        <p>Workflow:</p>
+        <ol>
+          <li>Fork del repo correspondiente.</li>
+          <li>Branch con tu cambio (<code>git checkout -b mi-feature</code>).</li>
+          <li>Commits con mensajes claros (qué + por qué).</li>
+          <li>PR contra <code>main</code>.</li>
+        </ol>
+
+        <h2 id="changelog">Changelog</h2>
+        <h3>v1.0.0 — 2026-06</h3>
+        <ul>
+          <li>Primera release pública.</li>
+          <li>ISO live booteable + img.zst + zip de código fuente.</li>
+          <li>pnu 1.2.0 con auto-upgrade de kernel.</li>
+          <li>Mirror en GitLab.</li>
+          <li>Documentación oficial (este sitio).</li>
+        </ul>
+
+        <div class="docs-footer-cta">
+          <h3>¿Algo confuso o faltante?</h3>
+          <p>Esta documentación es código en el repo. Editala vos mismo: <a href="https://github.com/tomymartingrinberg-cpu/NewUX-OS/edit/main/docs.html">github.com/tomymartingrinberg-cpu/NewUX-OS/edit/main/docs.html</a>.</p>
+          <p>O pedí ayuda en <a href="discuss.html">NewUX Discuss</a>.</p>
+        </div>
+
+      </article>
+    </main>
+  </div>
+
+  <footer>
+    <div class="container footer-bottom">
+      <span>© 2026 · NewUX OS · GNU GPL v3</span>
+    </div>
+  </footer>
+
+  <script>
+    function filterToc(q) {
+      const links = document.querySelectorAll('.sidebar-toc a');
+      const headers = document.querySelectorAll('.sidebar-toc h4');
+      q = q.toLowerCase().trim();
+      if (!q) {
+        links.forEach(a => a.style.display = '');
+        headers.forEach(h => h.style.display = '');
+        return;
+      }
+      headers.forEach(h => h.style.display = 'none');
+      links.forEach(a => {
+        a.style.display = a.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+    // Highlight section in view
+    const sections = document.querySelectorAll('article.docs-content h2[id]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          document.querySelectorAll('.sidebar-toc a').forEach(a => a.classList.remove('current'));
+          const link = document.querySelector('.sidebar-toc a[href="#' + e.target.id + '"]');
+          if (link) link.classList.add('current');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
