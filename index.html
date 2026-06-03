@@ -160,29 +160,29 @@
   <section id="instalar" class="section section-alt">
     <div class="container">
       <h2 class="section-title">Descargar e instalar</h2>
-      <p class="section-sub">Elegí la opción que mejor te quede. Todo bajo GNU GPL v3.</p>
+      <p class="section-sub">Elegí la opción que mejor te quede. Todo bajo GNU GPL v3 — alojado en GitLab Releases (la ISO no entra en el límite de 2 GiB de GitHub).</p>
 
       <div class="install-grid">
-        <a class="install-card primary" href="https://github.com/tomymartingrinberg-cpu/NewUX-OS/releases/latest">
+        <a class="install-card primary" href="https://gitlab.com/api/v4/projects/82856095/packages/generic/newux-os/1.0.0/newuxos_v1.iso">
           <div class="install-head">
-            <span class="install-tag">Recomendado</span>
-            <h3>Imagen booteable v1.0</h3>
+            <span class="install-tag">Recomendado · ISO Live</span>
+            <h3>newuxos_v1.iso</h3>
           </div>
-          <p>Imagen de disco lista para arrancar en VM (QEMU/KVM, VirtualBox, VMware) o grabar a USB con <code>dd</code>. Incluye el sistema instalado con instalador GUI, 3 kernels y todo el ricing aplicado.</p>
+          <p>ISO live booteable real (squashfs + initrd live + boot híbrido BIOS/UEFI). Arranca de USB o como CD-ROM virtual en QEMU/VirtualBox/VMware. Sin necesidad de instalar para probarlo.</p>
           <div class="install-meta">
-            <span><strong>Formato</strong> .img.zst</span>
-            <span><strong>UEFI</strong> sí (GRUB)</span>
+            <span><strong>Tamaño</strong> 2.58 GiB</span>
+            <span><strong>Boot</strong> BIOS + UEFI</span>
           </div>
-          <span class="install-btn">Descargar última versión →</span>
+          <span class="install-btn">Descargar ISO →</span>
         </a>
 
-        <a class="install-card" href="https://github.com/tomymartingrinberg-cpu/NewUX-OS/releases/latest/download/NewUX-OS-source.zip">
+        <a class="install-card" href="https://gitlab.com/api/v4/projects/82856095/packages/generic/newux-os/1.0.0/NewUX-OS-source.zip">
           <div class="install-head">
             <h3>Código fuente completo</h3>
           </div>
-          <p>ZIP con los 5 repos, el build system LFS/BLFS, el kernel build, los sources upstream cacheados y el kernel compilado.</p>
+          <p>ZIP con los 5 repos, el build system LFS/BLFS, el kernel build, sources upstream cacheados y el kernel compilado. Todo lo que se necesita para reproducir la distro.</p>
           <div class="install-meta">
-            <span><strong>Tamaño</strong> ~83 MB</span>
+            <span><strong>Tamaño</strong> 83 MB</span>
             <span><strong>Archivos</strong> 680</span>
           </div>
           <span class="install-btn">Descargar ZIP →</span>
@@ -202,12 +202,14 @@
       </div>
 
       <div class="install-note">
-        <strong>Probar en QEMU:</strong>
+        <strong>Probar la ISO en QEMU UEFI:</strong>
         <pre><code>qemu-system-x86_64 -enable-kvm -cpu host -m 4096 -smp 2 \
   -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE_4M.fd \
   -drive if=pflash,format=raw,file=OVMF_VARS_4M.fd \
-  -drive file=newux-os-1.0.qcow2,if=virtio,format=qcow2 \
+  -cdrom newuxos_v1.iso \
   -vga virtio -display gtk -device qemu-xhci -device usb-tablet</code></pre>
+        <strong style="margin-top: 14px;">Grabar a USB:</strong>
+        <pre><code>sudo dd if=newuxos_v1.iso of=/dev/sdX bs=4M status=progress oflag=sync</code></pre>
       </div>
     </div>
   </section>
@@ -292,8 +294,9 @@
         <p class="muted">Distribución GNU/Linux moderna construida desde LFS.</p>
       </div>
       <div class="footer-links">
-        <a href="https://github.com/tomymartingrinberg-cpu/NewUX-OS">Código</a>
-        <a href="https://github.com/tomymartingrinberg-cpu/NewUX-OS/releases">Releases</a>
+        <a href="https://github.com/tomymartingrinberg-cpu/NewUX-OS">GitHub</a>
+        <a href="https://gitlab.com/tomasmartingrinberg-cpu/NewUX-OS">GitLab</a>
+        <a href="https://gitlab.com/tomasmartingrinberg-cpu/NewUX-OS/-/releases">Releases</a>
         <a href="https://www.gnu.org/licenses/gpl-3.0.txt">Licencia</a>
         <a href="https://github.com/tomymartingrinberg-cpu/NewUX-OS/issues">Issues</a>
       </div>
