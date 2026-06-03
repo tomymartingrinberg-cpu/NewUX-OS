@@ -110,48 +110,49 @@
   <section id="features" class="section">
     <div class="container">
       <h2 class="section-title">Lo que hace distinta a NewUX OS</h2>
+      <p class="section-sub">Pensada para quien ya pasó la curva de aprendizaje y quiere control real sobre su sistema, sin sacrificar pulido visual.</p>
       <div class="features-grid">
         <article class="feature">
           <div class="feature-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <h3>Tres kernels, una distro</h3>
-          <p>Booteás Mainline RC (7.1-rc5), Stable (7.0.10) o LTS (6.18.33) desde GRUB. Si algo se rompe, modo Recovery directo.</p>
+          <p>Casi cualquier sistema operativo te encierra en un único kernel definido por su mantenedor. NewUX OS te deja elegir desde GRUB entre Mainline RC, Stable y LTS según necesites bleeding-edge, balance o estabilidad — más un modo Recovery siempre listo si algo se rompe.</p>
         </article>
         <article class="feature">
           <div class="feature-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </div>
-          <h3><code>pnu</code>, gestor universal</h3>
-          <p>Flathub + AppImage + source-compile en un solo comando. Sintaxis estilo apt/dnf. Y <code>pnu update-kernel</code> auto-actualiza al último mainline RC de kernel.org.</p>
+          <h3>Un solo gestor para todo</h3>
+          <p>Los gestores tradicionales te obligan a aprender una herramienta distinta por cada formato — una para repositorios oficiales, otra para Flatpak, otra para AppImage, y todavía hay que compilar a mano lo que falta. <code>pnu</code> unifica todo eso bajo una API limpia tipo apt, y además auto-actualiza el kernel al último RC publicado en kernel.org.</p>
         </article>
         <article class="feature">
           <div class="feature-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
-          <h3>Instalador en minutos</h3>
-          <p>GUI propia en GTK3 con particionado automático, alongside o manual, opcional cifrado LUKS. Sin tropezar con Calamares.</p>
+          <h3>Instalador que no oculta nada</h3>
+          <p>La mayoría de los instaladores actuales son cajas negras: clickeás "siguiente" y rezás. El de NewUX OS está escrito en Python + GTK3, son cientos de líneas legibles, mostrá exactamente qué hace cada paso (particionado, cifrado LUKS opcional, configuración GRUB) y podés modificarlo vos mismo si te incomoda algo.</p>
         </article>
         <article class="feature">
           <div class="feature-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
           </div>
-          <h3>Ricing pro, out-of-the-box</h3>
-          <p>Greybird-Dark + Papirus-Dark + acento teal <code>#16c3a5</code>, top bar + dock estilo elementary, fuentes Noto Sans / JetBrains Mono.</p>
+          <h3>Identidad visual desde el primer arranque</h3>
+          <p>Las distros típicas te dejan un escritorio con look genérico, esperando que pases horas configurando temas, fuentes, paneles, atajos y dock. NewUX OS viene con una paleta, una tipografía y un layout definidos y consistentes — no para limitarte, sino para darte un punto de partida que no parezca un demo de los noventa.</p>
         </article>
         <article class="feature">
           <div class="feature-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
           </div>
-          <h3>Repositorio propio</h3>
-          <p>Manifests YAML servidos por GitHub Pages. <code>pnu repo-add</code> y empezás a publicar paquetes para la comunidad.</p>
+          <h3>Tu propio repositorio sin infraestructura</h3>
+          <p>Publicar un paquete para que tus usuarios lo instalen normalmente exige montar un servidor, firmar GPG, mantener un mirror y armar metadata compleja. Con NewUX OS te alcanza un repo git público con manifests YAML — un <code>pnu repo-add</code> del lado del usuario y ya está. Sin servidor propio, sin claves, sin ceremonia.</p>
         </article>
         <article class="feature">
           <div class="feature-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           </div>
-          <h3>Todo el código abierto</h3>
-          <p>GPLv3 en cada repo. Scripts de build reproducibles, no hay binarios mágicos: todo se construye y se versiona.</p>
+          <h3>Reproducible, sin binarios mágicos</h3>
+          <p>Demasiados sistemas operativos se distribuyen como imágenes opacas: bajás un blob de varios GB y nadie sabe cómo se generó. NewUX OS publica cada uno de los scripts y configuraciones que la construyen, paso a paso desde Linux From Scratch — podés auditar, modificar y rebuildear toda la distro desde cero en tu propia máquina.</p>
         </article>
       </div>
     </div>
