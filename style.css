@@ -601,7 +601,8 @@ footer {
 }
 .footer-links a:hover { color: var(--accent); }
 .footer-bottom {
-  display: flex; justify-content: space-between;
+  display: flex; justify-content: center;
+  text-align: center;
   font-size: 0.84rem;
   color: var(--text-mute);
   padding-top: 22px;
@@ -611,6 +612,36 @@ footer {
 }
 .footer-bottom a { color: var(--text-dim); }
 .footer-bottom a:hover { color: var(--accent); }
+
+/* NewUX Rock CTA en nav */
+.nav-rock {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: linear-gradient(135deg, rgba(22, 195, 165, 0.15) 0%, rgba(30, 224, 189, 0.08) 100%);
+  border: 1px solid rgba(22, 195, 165, 0.35);
+  padding: 6px 14px;
+  border-radius: 99px;
+  color: var(--accent) !important;
+  font-weight: 600 !important;
+  font-size: 0.86rem;
+  transition: all 180ms ease;
+}
+.nav-rock:hover {
+  background: linear-gradient(135deg, rgba(22, 195, 165, 0.25) 0%, rgba(30, 224, 189, 0.15) 100%);
+  border-color: var(--accent);
+  color: var(--accent-hi) !important;
+  transform: translateY(-1px);
+}
+.rock-dot {
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent);
+  animation: rock-pulse 2.2s ease-in-out infinite;
+}
+@keyframes rock-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
