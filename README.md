@@ -112,4 +112,4 @@ Ver [LICENSE](LICENSE) para el texto completo.
 
 ## Autor
 
-[tomymartingrinberg-cpu](https://github.com/tomymartingrinberg-cpu) — `REDACTED@example.com`
+[tomymartingrinberg-cpu](https://github.com/tomymartingrinberg-cpu)
