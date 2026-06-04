@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NewUX Rock · Tu identidad NewUX</title>
-  <meta name="description" content="NewUX Rock — una sola cuenta para sincronizar configuraciones, kernels, repos, dotfiles y theming entre todas tus máquinas NewUX OS." />
+  <meta name="description" content="NewUX Rock — una sola cuenta para sincronizar configs, kernels, repos, dotfiles y theming entre todas tus máquinas NewUX OS. End-to-end cifrado." />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,6 +29,7 @@
         <a href="docs.html">Docs</a>
         <a href="discuss.html">Discuss</a>
         <a href="rock.html" class="nav-rock active"><span class="rock-dot"></span>NewUX Rock</a>
+        <a href="donar.html" class="nav-donate">♥ Donar</a>
         <a href="./#instalar" class="nav-cta">Instalar</a>
       </div>
     </div>
@@ -36,20 +37,20 @@
 
   <header class="rock-hero">
     <div class="container">
-      <span class="eyebrow rock-eyebrow">Próximamente · beta privada</span>
+      <span class="eyebrow rock-eyebrow">v1.0 disponible · GNU GPL v3</span>
       <h1 class="rock-title">
         Sos un pilar.<br/>
         <em>NewUX Rock.</em>
       </h1>
       <p class="lead rock-lead">
-        Tu cuenta única para llevar tu NewUX OS con vos. Una identidad que sincroniza ricing, paquetes, kernels, dotfiles y preferencias entre todas tus máquinas — sin pelearte con scripts dispersos ni servicios de terceros.
+        Tu cuenta única para llevar tu NewUX OS con vos. Sincroniza ricing, paquetes, kernels, dotfiles y preferencias entre todas tus máquinas — end-to-end cifrado, cliente CLI open-source, opcionalmente self-hosted.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary btn-lg" href="#early-access">
-          <span>Unirme a la beta</span>
+        <a class="btn btn-primary btn-lg" href="#planes">
+          <span>Crear cuenta</span>
         </a>
-        <a class="btn btn-ghost btn-lg" href="#how">
-          <span>Cómo funciona</span>
+        <a class="btn btn-ghost btn-lg" href="#instalar-cli">
+          <span>Instalar cliente CLI</span>
         </a>
       </div>
       <div class="rock-meaning">
@@ -64,34 +65,56 @@
     </div>
   </header>
 
-  <section id="what" class="section">
+  <section id="instalar-cli" class="section">
     <div class="container">
-      <h2 class="section-title">¿Qué es NewUX Rock?</h2>
-      <p class="section-sub">No es "otra cuenta más". Es la única que ata todo lo que hace tuyo a tu NewUX OS — y la lleva con vos sin importar en qué máquina te sientes.</p>
+      <h2 class="section-title">El cliente CLI ya está disponible</h2>
+      <p class="section-sub">Funciona en cualquier Linux (NewUX OS, Debian, Fedora, Arch). Es un script bash de ~600 líneas, leíble, auditable.</p>
+
+      <div class="install-cli">
+        <h3>Instalación (1 comando)</h3>
+        <pre><code>sudo curl -sL https://raw.githubusercontent.com/tomymartingrinberg-cpu/newux-os-rock/main/cli/bin/rock \
+  -o /usr/local/bin/rock &amp;&amp; sudo chmod +x /usr/local/bin/rock</code></pre>
+
+        <h3>Empezar</h3>
+        <pre><code>rock init                        # genera tu par de claves Ed25519 local
+rock signup tu@email.com @user   # crear cuenta (recibís magic-link)
+rock login tu@email.com          # login en cualquier máquina
+rock push                        # empaqueta+cifra y sube tus configs
+rock pull                        # baja y restaura en otra máquina</code></pre>
+
+        <p class="muted">¿No querés depender de nuestro servidor? El cliente también soporta <strong>modo offline</strong>: usás un repo git tuyo (GitHub/GitLab privado) como storage. <code>rock mode offline &amp;&amp; rock remote set https://github.com/tu/tu-rock-repo</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="what" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Qué hace por vos</h2>
+      <p class="section-sub">Una sola cuenta. Tu NewUX OS te sigue a donde vayas.</p>
 
       <div class="features-grid">
         <article class="feature rock-feature">
           <div class="feature-ico rock-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
-          <h3>Sincronización en segundo plano</h3>
-          <p>Cambiás un atajo de teclado en la laptop, lo encontrás cuando volvés a la desktop. Tu acento teal, tu wallpaper, tu paleta de terminal — todo viaja sin que toques un solo dotfile.</p>
+          <h3>Sync en background</h3>
+          <p>Cambiás un atajo en la laptop, lo encontrás cuando volvés a la desktop. El cliente <code>rock</code> serializa tus configs en un <code>.rock.tar.zst</code> cifrado.</p>
         </article>
 
         <article class="feature rock-feature">
           <div class="feature-ico rock-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>
           </div>
-          <h3>Mismos paquetes, todas tus máquinas</h3>
-          <p>Tu lista de Flatpaks, AppImages y paquetes compilados desde source viaja con tu cuenta. <code>pnu sync</code> en una máquina nueva y tenés tu setup completo en minutos.</p>
+          <h3>Misma lista de paquetes</h3>
+          <p>Tu lista de Flatpaks, AppImages y paquetes compilados desde source viaja con tu cuenta. <code>pnu rock-sync</code> en máquina nueva, recuperás todo en minutos.</p>
         </article>
 
         <article class="feature rock-feature">
           <div class="feature-ico rock-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
           </div>
-          <h3>Tu repo personal</h3>
-          <p>Cada cuenta Rock viene con su propio namespace <code>rock.newuxos.org/tu-usuario</code> para publicar manifests pnu sin necesidad de GitHub. Comparte un paquete con un solo link.</p>
+          <h3>Repos pnu privados</h3>
+          <p>(Plan Pro+) Publicá manifests YAML solo para tu equipo. Namespace <code>rock.newuxos.org/@tuusuario</code> con auth y ACLs. Sin necesidad de GitHub.</p>
         </article>
 
         <article class="feature rock-feature">
@@ -99,7 +122,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m20.07-9.07l-4.24 4.24M7.17 16.83l-4.24 4.24m0-18.14l4.24 4.24m9.66 9.66l4.24 4.24"/></svg>
           </div>
           <h3>Discovery social</h3>
-          <p>Mirá qué ricing tienen otros usuarios Rock, suscribite a sus dotfiles, forkeá una paleta entera. Un mini-ecosistema curado por la comunidad — sin algoritmo, sin ads.</p>
+          <p>Perfil público en <code>rock.newuxos.org/@tuusuario</code>. Compartí tu paleta, tus dotfiles y tus manifests con el resto de la comunidad. Sin algoritmo, sin ads.</p>
         </article>
 
         <article class="feature rock-feature">
@@ -107,46 +130,116 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <h3>End-to-end encrypted</h3>
-          <p>Tus dotfiles y configs se cifran del lado tuyo antes de salir de tu máquina. La clave nunca toca nuestros servidores. Ni nosotros ni un atacante podemos leerlos.</p>
+          <p>Tus dotfiles se cifran (AES-256-GCM) en tu máquina antes de subirse. La clave nunca toca nuestros servidores. Ni nosotros ni un atacante podemos leerlos.</p>
         </article>
 
         <article class="feature rock-feature">
           <div class="feature-ico rock-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           </div>
-          <h3>Open standard</h3>
-          <p>El protocolo Rock es público (spec en el repo). Si algún día el servicio desaparece, vos podés correr tu propio servidor Rock — tus dotfiles y manifests no dependen de nosotros.</p>
+          <h3>Self-hostable</h3>
+          <p>El backend completo es GPLv3 y corre en Cloudflare Workers (free tier). Si no querés depender de nosotros, <a href="https://github.com/tomymartingrinberg-cpu/newux-os-rock/blob/main/docs/DEPLOY.md">desplegás tu propia instancia</a> en 30 min.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section id="how" class="section section-alt">
+  <section id="planes" class="section">
+    <div class="container">
+      <h2 class="section-title">Planes</h2>
+      <p class="section-sub">Procesado por Mercado Pago — acepta tarjeta, débito, dinero en cuenta MP, Rapipago, Pago Fácil, transferencia bancaria.</p>
+
+      <div class="plans-grid">
+        <div class="plan-card">
+          <div class="plan-head">
+            <h3>Free</h3>
+            <div class="plan-price">USD&nbsp;0<span>/mes</span></div>
+          </div>
+          <ul class="plan-features">
+            <li><strong>3</strong> dispositivos sincronizados</li>
+            <li><strong>500 MB</strong> storage cifrado</li>
+            <li><strong>1.000</strong> API requests/mes</li>
+            <li>Snapshots versionados <strong>7 días</strong></li>
+            <li>Perfil público en discovery</li>
+            <li>Acceso al cliente CLI</li>
+            <li>Modo offline (git remote propio)</li>
+          </ul>
+          <button class="btn btn-ghost" onclick="alert('Free no requiere pago. Instalá el CLI y corré: rock init + rock signup tu@email.com @username')">Empezar gratis</button>
+        </div>
+
+        <div class="plan-card plan-popular">
+          <div class="plan-tag">Más elegido</div>
+          <div class="plan-head">
+            <h3>Pro</h3>
+            <div class="plan-price">USD&nbsp;3<span>/mes</span></div>
+          </div>
+          <ul class="plan-features">
+            <li><strong>∞</strong> dispositivos sincronizados</li>
+            <li><strong>25 GB</strong> storage cifrado</li>
+            <li><strong>50.000</strong> API requests/mes</li>
+            <li>Snapshots versionados <strong>90 días</strong></li>
+            <li><strong>Repos pnu privados</strong> (ilimitados)</li>
+            <li>Perfil destacado en discovery</li>
+            <li>Audit log <strong>30 días</strong></li>
+            <li>Soporte prioritario en Discuss</li>
+          </ul>
+          <button class="btn btn-primary" data-plan="pro" onclick="subscribe('pro')">Suscribirme — USD 3/mes</button>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-head">
+            <h3>Team</h3>
+            <div class="plan-price">USD&nbsp;8<span>/mes/seat</span></div>
+          </div>
+          <ul class="plan-features">
+            <li>Todo lo del plan Pro</li>
+            <li><strong>100 GB</strong> storage compartido</li>
+            <li><strong>500.000</strong> API requests/mes</li>
+            <li>Snapshots versionados <strong>365 días</strong></li>
+            <li><strong>Configs compartidas</strong> del equipo</li>
+            <li><strong>Org namespace</strong> en repos pnu</li>
+            <li><strong>SSO</strong> via OIDC/SAML</li>
+            <li><strong>Custom domain</strong> (<code>rock.tudominio</code>)</li>
+            <li>Audit log <strong>365 días</strong></li>
+            <li><strong>SLA 99.9%</strong> + soporte directo</li>
+          </ul>
+          <button class="btn btn-primary" data-plan="team" onclick="subscribe('team')">Suscribirme — USD 8/mes</button>
+        </div>
+      </div>
+
+      <div class="planes-faq">
+        <p class="muted"><strong>¿Cambiar entre planes?</strong> Sí — desde tu cuenta web (próximamente: dashboard). Por ahora desde el CLI: <code>rock subscribe pro</code> o <code>rock subscribe team</code>.</p>
+        <p class="muted"><strong>¿Mercado Pago en otros países?</strong> Funciona en AR, BR, MX, CL, CO, PE, UY, VE — todos los países donde MP opera. El cobro se hace en USD y MP convierte al cambio del día.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
     <div class="container">
       <h2 class="section-title">Cómo funciona</h2>
       <div class="rock-flow">
         <div class="flow-step">
           <div class="flow-num">01</div>
-          <h3>Creás tu Rock ID</h3>
-          <p>Un username público corto (ej. <code>@tomas</code>) y un email. Generamos tu par de claves localmente.</p>
+          <h3>Instalás el CLI</h3>
+          <p>Un solo comando. Funciona en NewUX OS, Debian, Fedora, Arch.</p>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-step">
           <div class="flow-num">02</div>
-          <h3>Lo conectás en NewUX OS</h3>
-          <p><code>rock login</code> en cualquier máquina. La primera vez te pide la clave privada (USB / paste).</p>
+          <h3>Creás tu Rock ID</h3>
+          <p><code>rock signup tu@email.com @user</code>. Recibís magic-link en el email.</p>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-step">
           <div class="flow-num">03</div>
-          <h3>Sync automático</h3>
-          <p>Cambios locales en configs, dotfiles, lista de paquetes — se cifran y sincronizan en background.</p>
+          <h3>Sincronizás</h3>
+          <p><code>rock push</code> empaqueta configs cifradas. <code>rock pull</code> las restaura en otra máquina.</p>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-step">
           <div class="flow-num">04</div>
-          <h3>En otra máquina</h3>
-          <p>Instalá NewUX OS, <code>rock login</code>, <code>pnu sync</code>. Listo: tu desktop entero, tal cual lo dejaste.</p>
+          <h3>Sumás máquinas</h3>
+          <p>En cada nueva: <code>rock login</code> + <code>rock pull</code>. Todo tu desktop, tal cual lo dejaste.</p>
         </div>
       </div>
     </div>
@@ -155,7 +248,7 @@
   <section class="section">
     <div class="container">
       <h2 class="section-title">Qué se sincroniza</h2>
-      <p class="section-sub">Vos decidís qué entra en tu Rock. Por default solo lo "portable" — nada de claves SSH, nada de browser cookies, nada de cosas sensibles que no necesiten viajar.</p>
+      <p class="section-sub">Vos decidís qué entra. Por default solo lo "portable" — nada de claves SSH, nada de browser cookies, nada sensible que no necesite viajar.</p>
 
       <div class="sync-grid">
         <div class="sync-cat">
@@ -185,82 +278,10 @@
             <li>Claves SSH privadas</li>
             <li>Browser cookies / sesiones</li>
             <li>Passwords del keyring</li>
-            <li>Archivos personales (~/Documents, etc.)</li>
+            <li>Archivos personales (<code>~/Documents</code>)</li>
             <li>Caches de aplicaciones</li>
           </ul>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="section-title">Planes</h2>
-      <p class="section-sub">Si lo usás vos, gratis. Si lo necesita tu equipo, pagás barato. Sin venderte data, sin ads.</p>
-
-      <div class="plans-grid">
-        <div class="plan-card">
-          <div class="plan-head">
-            <h3>Free</h3>
-            <div class="plan-price">$0<span>/mes</span></div>
-          </div>
-          <ul class="plan-features">
-            <li>1 Rock ID</li>
-            <li>5 dispositivos sincronizados</li>
-            <li>1 GiB storage personal</li>
-            <li>Repo personal pnu público</li>
-            <li>Discovery social</li>
-          </ul>
-          <a href="#early-access" class="btn btn-ghost">Empezar gratis</a>
-        </div>
-
-        <div class="plan-card plan-popular">
-          <div class="plan-tag">Recomendado</div>
-          <div class="plan-head">
-            <h3>Pro</h3>
-            <div class="plan-price">$3<span>/mes</span></div>
-          </div>
-          <ul class="plan-features">
-            <li>Todo lo del Free</li>
-            <li>Dispositivos ilimitados</li>
-            <li>25 GiB storage</li>
-            <li>Repos privados pnu</li>
-            <li>Backups versionados (30 días)</li>
-            <li>Soporte prioritario en Discuss</li>
-          </ul>
-          <a href="#early-access" class="btn btn-primary">Unirme a la beta</a>
-        </div>
-
-        <div class="plan-card">
-          <div class="plan-head">
-            <h3>Team</h3>
-            <div class="plan-price">$8<span>/mes/seat</span></div>
-          </div>
-          <ul class="plan-features">
-            <li>Todo lo del Pro</li>
-            <li>Configs compartidas del equipo</li>
-            <li>Org namespace en el repo</li>
-            <li>SSO via OIDC</li>
-            <li>100 GiB storage compartido</li>
-            <li>SLA 99.9%</li>
-          </ul>
-          <a href="mailto:REDACTED@example.com?subject=NewUX%20Rock%20Team" class="btn btn-ghost">Contactanos</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="early-access" class="section">
-    <div class="container">
-      <div class="early-access-card">
-        <h2>Sumate a la beta privada</h2>
-        <p>NewUX Rock está en desarrollo. Estamos abriendo cupos limitados para early access — vos probás, nos das feedback, y cuando salga la versión 1.0 ya tenés tu Rock ID reservado.</p>
-        <form class="early-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Anotado ✓'; this.querySelector('button').disabled=true;">
-          <input type="email" placeholder="tu@email.com" required />
-          <input type="text" placeholder="@username deseado" pattern="@?[a-zA-Z0-9_-]{3,20}" />
-          <button type="submit" class="btn btn-primary">Reservar mi Rock ID</button>
-        </form>
-        <p class="early-note">Sin spam. Sin reventa. Sin algoritmo. Solo el email cuando abrimos la beta.</p>
       </div>
     </div>
   </section>
@@ -275,28 +296,28 @@
       </details>
 
       <details class="faq-item">
+        <summary>¿Cómo se cobra el plan pago?</summary>
+        <p>Vía Mercado Pago Subscriptions (preapproval). Cobro mensual automático al método de pago que elegiste (tarjeta, débito, dinero en cuenta MP). Cancelás cuando quieras desde tu cuenta MP o con <code>rock subscribe cancel</code>.</p>
+      </details>
+
+      <details class="faq-item">
         <summary>¿Por qué no usar Syncthing / Dropbox / Nextcloud?</summary>
         <p>Esos sirven para sincronizar archivos genéricos. NewUX Rock entiende la estructura específica de NewUX OS — sabe qué es un manifest pnu, qué es un theme XFCE válido, qué dotfiles tienen secretos que no deben viajar. Es un sync con contexto, no un dumper de bytes.</p>
       </details>
 
       <details class="faq-item">
-        <summary>¿Self-hosted?</summary>
-        <p>Sí, esa es una promesa central. El servidor Rock será un binario Go open-source que podés correr en tu propia VPS. El SaaS oficial existe para quienes prefieren no mantener infraestructura.</p>
-      </details>
-
-      <details class="faq-item">
-        <summary>¿Cuándo sale?</summary>
-        <p>La beta privada arranca en Q3 2026. La versión 1.0 pública apunta a fin de 2026. Si te anotás ahora, tenés tu spot reservado.</p>
+        <summary>Self-hosted</summary>
+        <p>Sí. El servidor Rock es un Cloudflare Worker (TypeScript) open-source en <a href="https://github.com/tomymartingrinberg-cpu/newux-os-rock">el repo</a>. Lo deployás con <code>wrangler deploy</code> en ~30 min. Ver <a href="https://github.com/tomymartingrinberg-cpu/newux-os-rock/blob/main/docs/DEPLOY.md">docs/DEPLOY.md</a>.</p>
       </details>
 
       <details class="faq-item">
         <summary>¿Funciona en otras distros?</summary>
-        <p>El cliente (binario <code>rock</code>) funcionará en cualquier Linux, pero la sincronización de configs está pensada para el stack NewUX (XFCE + pnu). En otras distros vas a tener sync de dotfiles y manifests pnu, pero no de configs XFCE específicas.</p>
+        <p>El cliente <code>rock</code> funciona en cualquier Linux con bash, openssl, jq, zstd. La sincronización de configs XFCE es específica de NewUX, pero en otras distros tenés sync de dotfiles y manifests pnu igual.</p>
       </details>
 
       <details class="faq-item">
         <summary>¿Y mi privacidad?</summary>
-        <p>Cifrado end-to-end por default. El servidor solo ve blobs cifrados con tu clave. Si perdés la clave privada, perdés acceso a tus datos (no podemos recuperarlos). Ese es el costo de la privacidad real.</p>
+        <p>Cifrado end-to-end por default. El servidor solo ve blobs cifrados con tu clave (derivada de tu identidad Ed25519 local). Si perdés <code>~/.config/rock/identity.key</code>, perdés acceso a tus datos (no podemos recuperarlos). Backupea esa clave en un gestor de passwords o USB.</p>
       </details>
     </div>
   </section>
@@ -306,5 +327,32 @@
       <span>© 2026 · NewUX OS · GNU GPL v3</span>
     </div>
   </footer>
+
+  <script>
+    const API = "https://api.newuxos.org";
+    async function subscribe(plan) {
+      // Verificar si está logueado en el browser (no implementado todavía)
+      const token = localStorage.getItem('rock_token');
+      if (!token) {
+        alert('Para suscribirte desde el navegador necesitás loguearte primero.\n\nPor ahora, hacelo desde el CLI:\n\n  rock login tu@email.com\n  rock subscribe ' + plan);
+        return;
+      }
+      try {
+        const resp = await fetch(`${API}/v1/billing/subscribe`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify({ plan }),
+        });
+        const data = await resp.json();
+        if (data.checkout_url) {
+          window.location.href = data.checkout_url;
+        } else {
+          throw new Error(data.error || 'sin checkout url');
+        }
+      } catch (e) {
+        alert('Falló: ' + e.message + '\n\nEl backend Rock probablemente no está deployado todavía. Ver DEPLOY.md');
+      }
+    }
+  </script>
 </body>
 </html>
