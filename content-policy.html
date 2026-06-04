@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de contenido · subdominios newux.org</title>
+  <meta name="description" content="Reglas que rigen el contenido de los subdominios *.newux.org incluidos en el plan Team de NewUX Rock." />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="pages.css" />
+  <meta name="theme-color" content="#0a1018" />
+</head>
+<body class="page-policy">
+  <div class="bg-mesh"></div>
+  <div class="bg-grid"></div>
+
+  <nav class="topbar">
+    <div class="container nav-row">
+      <a href="./" class="brand">
+        <img src="assets/logo.png" alt="" />
+        <span>NewUX OS</span>
+      </a>
+      <div class="nav-links">
+        <a href="./">Inicio</a>
+        <a href="docs.html">Docs</a>
+        <a href="discuss.html">Discuss</a>
+        <a href="rock.html" class="nav-rock"><span class="rock-dot"></span>NewUX Rock</a>
+        <a href="donar.html" class="nav-donate">♥ Donar</a>
+        <a href="./#instalar" class="nav-cta">Instalar</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="docs-main policy-main">
+    <div class="container" style="max-width: 880px;">
+      <header class="docs-header">
+        <span class="eyebrow">Política de contenido · v1.0</span>
+        <h1>Subdominios <code>*.newux.org</code></h1>
+        <p class="lead">Si suscribís al plan Team de NewUX Rock obtenés un subdominio personalizado bajo <code>newux.org</code>. Esto es lo que podés y lo que no podés publicar ahí.</p>
+        <div class="docs-meta">
+          <span>Vigencia: desde 2026-06</span>
+          <span>·</span>
+          <span>Idioma vinculante: español</span>
+        </div>
+      </header>
+
+      <article class="docs-content">
+
+        <div class="callout callout-info">
+          <strong>TL;DR.</strong> Tu <code>tu-nombre.newux.org</code> tiene que ser sobre NewUX OS o Linux en general — herramientas, paquetes, docs, ricing, comunidad. No puede ser sobre otras distribuciones específicas, ni hablar bien ni mal de otras distros, ni hablar bien ni mal de Linux en general, ni hablar bien ni mal de NewUX OS. Es para hacer cosas, no para opinar.
+        </div>
+
+        <h2 id="por-que">Por qué estas reglas</h2>
+        <p>El dominio <code>newux.org</code> es el ancla de identidad de NewUX OS. Cuando le prestamos un subdominio a otra persona, ese subdominio <em>habla por nuestra marca aunque no queramos</em>. Si <code>juan.newux.org</code> publica "Ubuntu es basura", para el lector casual eso lo dijo el proyecto NewUX OS.</p>
+        <p>Para evitar eso sin censurar opiniones legítimas, restringimos los subdominios a contenido <strong>técnico, neutral y constructivo</strong> sobre NewUX OS y Linux en general. Si querés escribir tu propia review subjetiva de distros, hostealo en otro dominio.</p>
+
+        <h2 id="permitido">Lo que SÍ podés publicar</h2>
+        <ul>
+          <li><strong>Tutoriales técnicos</strong> de NewUX OS: cómo configurar tal cosa, cómo escribir un manifest pnu, cómo hacer un ricing, etc.</li>
+          <li><strong>Manifests pnu</strong> tuyos servidos como repo público (alternativa a hostear en GitHub Pages).</li>
+          <li><strong>Dotfiles</strong>, themes, wallpapers, configuraciones compartidas con la comunidad.</li>
+          <li><strong>Documentación neutral de Linux</strong>: explicar systemd, GRUB, particionado, networking, etc. — herramientas que aplican a cualquier distro pero documentadas en abstracto, no comparando.</li>
+          <li><strong>Tu portfolio</strong> de proyectos open-source / Linux relacionados.</li>
+          <li><strong>Showcase de tu desktop</strong>: capturas, vídeos, breakdown de tu ricing.</li>
+          <li><strong>Herramientas open-source</strong> que escribiste para Linux: redirects al repo, docs, demos.</li>
+          <li><strong>Blog técnico</strong>: explicar cómo resolviste un problema, deep-dives a tecnologías Linux (kernel, X/Wayland, filesystems, etc.) en términos generales.</li>
+          <li><strong>Eventos / meetups</strong> de Linux o NewUX OS.</li>
+        </ul>
+
+        <h2 id="prohibido">Lo que NO podés publicar</h2>
+
+        <h3>Sobre otras distribuciones</h3>
+        <ul>
+          <li>Contenido <strong>centrado en otra distro</strong> (reviews de Ubuntu, guías de Arch, tutoriales específicos de Fedora, etc.). Si tu post necesita mencionar el nombre de otra distro como ejemplo, está bien — siempre que el foco sea técnico y no comparativo.</li>
+          <li><strong>Comparaciones</strong> ("X distro es mejor que Y", "Z distro es la peor", rankings, etc.).</li>
+          <li>Defender o atacar otras distros, sus mantenedores o sus comunidades.</li>
+          <li>Hablar específicamente del ecosistema de otra distro (paquetería <code>apt</code> en abstracto sí, pero un blog sobre "lo nuevo de Ubuntu 26.04" no).</li>
+        </ul>
+
+        <h3>Opiniones sobre Linux como tal</h3>
+        <ul>
+          <li>"Linux es mejor que Windows / macOS" o viceversa.</li>
+          <li>"Wayland es el futuro y X11 es basura" (o viceversa).</li>
+          <li>Posturas militantes ("vos no sos libre si usás binarios propietarios", etc.).</li>
+          <li>Apologías o ataques al modelo open-source en abstracto.</li>
+        </ul>
+
+        <h3>Opiniones sobre NewUX OS</h3>
+        <ul>
+          <li>Reviews, crítica positiva o negativa.</li>
+          <li>"NewUX OS es la mejor distro" / "NewUX OS tiene tal problema y deberían arreglarlo en su próxima versión".</li>
+          <li>Predicciones sobre el roadmap o decisiones del proyecto.</li>
+        </ul>
+
+        <p class="muted">No es que esas opiniones sean inválidas — es que el subdominio <code>newux.org</code> no es el lugar para hacerlas. Para opinar usá tu blog personal, Discuss, o redes sociales.</p>
+
+        <h3>Contenido no relacionado</h3>
+        <ul>
+          <li>Sitios personales sin conexión con NewUX OS o Linux (blog de viajes, portfolio fotográfico, etc.).</li>
+          <li>Cualquier vertical comercial no técnica (ecommerce, marketing, finanzas, etc.).</li>
+        </ul>
+
+        <h3>Contenido ilegal o tóxico</h3>
+        <ul>
+          <li>Lo obvio: ilegal en Argentina y/o país del visitante, lenguaje discriminatorio, doxing, spam, malware, piratería, NSFW.</li>
+          <li>Cualquier cosa que viole los Acceptable Use Policy de Cloudflare (donde están alojados los DNS).</li>
+        </ul>
+
+        <h2 id="zona-gris">Zona gris (consultá antes)</h2>
+        <ul>
+          <li><strong>Comparativas técnicas neutrales</strong> (ej. "performance de ext4 vs btrfs"): generalmente OK si están en términos puramente técnicos y no recomienda una sobre otra "porque la otra es mala".</li>
+          <li><strong>Migración de otra distro a NewUX OS</strong>: OK si es guía técnica neutral. No OK si vende NewUX OS como "superior".</li>
+          <li><strong>Anuncios de empleos / contrataciones</strong>: OK si son posiciones técnicas relacionadas a Linux/NewUX. Si tu empresa contrata UX designers sin nada que ver, no.</li>
+          <li><strong>Plataformas comerciales open-source</strong> (ej. "vendemos soporte enterprise de NewUX OS"): OK si NewUX OS es central. Notificanos por las dudas.</li>
+        </ul>
+
+        <h2 id="proceso">Proceso de aprobación</h2>
+        <ol>
+          <li>Activás tu plan Team de NewUX Rock.</li>
+          <li>Reservás el subdominio desde el dashboard: <code>tu-nombre.newux.org</code>.</li>
+          <li><strong>Revisión humana</strong>: en hasta 72 hs te confirmamos por email si está aprobado.</li>
+          <li>Una vez aprobado, configurás un CNAME en tu DNS apuntando al endpoint de Cloudflare for SaaS que te enviamos (instrucciones por email).</li>
+          <li>El TLS se emite automáticamente (Cloudflare maneja todo).</li>
+        </ol>
+
+        <h2 id="incumplimiento">Si publicás algo que no se permite</h2>
+        <ol>
+          <li><strong>Primer aviso</strong>: te mandamos email pidiendo bajar el contenido. Tenés 7 días.</li>
+          <li><strong>Si no bajás</strong>: pausamos el DNS del subdominio (vuelve a 404). Tu plan Team sigue activo, perdés solo el feature del subdominio.</li>
+          <li><strong>Reincidencia</strong>: damos de baja el subdominio permanentemente. No hay reembolso del mes en curso pero podés cancelar el plan y volver a Pro.</li>
+          <li><strong>Casos extremos</strong> (ilegal, malware, doxing): bajamos el DNS sin previo aviso y damos de baja la cuenta.</li>
+        </ol>
+
+        <h2 id="apelaciones">Apelaciones</h2>
+        <p>Si creés que aplicamos esta política mal, escribinos a <a href="mailto:REDACTED@example.com?subject=Apelaci%C3%B3n%20pol%C3%ADtica%20subdominio">REDACTED@example.com</a> con el caso concreto. Revisamos en 7 días.</p>
+
+        <h2 id="cambios">Cambios a esta política</h2>
+        <p>Si actualizamos esta política, te notificamos por email al menos <strong>30 días antes</strong>. Si los cambios te resultan inaceptables, podés cancelar Team y mantener el subdominio activo hasta el final del período pagado.</p>
+
+        <h2 id="responsabilidad">Quién es responsable</h2>
+        <ul>
+          <li><strong>Vos</strong> sos legalmente responsable del contenido publicado en tu subdominio. Ante reclamos legales, NewUX OS se reserva el derecho de bajar el contenido y compartir tu identidad con autoridades si corresponde.</li>
+          <li><strong>NewUX OS</strong> no audita proactivamente el contenido. Solo actúa ante reportes o revisiones puntuales.</li>
+        </ul>
+
+        <div class="docs-footer-cta">
+          <h3>¿Dudas antes de suscribirte?</h3>
+          <p>Si tu caso no es claro, preguntá en <a href="discuss.html">NewUX Discuss</a> categoría "General" o escribinos a <a href="mailto:REDACTED@example.com">REDACTED@example.com</a>.</p>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-bottom">
+      <span>© 2026 · NewUX OS · GNU GPL v3</span>
+    </div>
+  </footer>
+</body>
+</html>

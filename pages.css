@@ -655,6 +655,46 @@
 }
 .plan-card .btn { width: 100%; justify-content: center; text-align: center; }
 
+/* Team plan — highlight subdomain feature */
+.plan-card.plan-team {
+  border-color: rgba(22, 195, 165, 0.4);
+}
+.plan-card.plan-team .plan-features li:nth-child(2) {
+  background: linear-gradient(90deg, rgba(22, 195, 165, 0.15), transparent);
+  padding-left: 28px;
+  margin-left: -22px;
+  margin-right: -22px;
+  padding-right: 22px;
+  border-radius: 8px;
+  position: relative;
+}
+.plan-card.plan-team .plan-features li:nth-child(2)::before {
+  content: "★";
+  color: var(--accent);
+}
+.feat-new {
+  display: inline-block;
+  background: var(--accent);
+  color: #06141a;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 99px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.plan-note {
+  font-size: 0.78rem;
+  color: var(--text-mute);
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  line-height: 1.5;
+}
+.plan-note a { color: var(--accent); }
+
 .early-access-card {
   background: linear-gradient(135deg, var(--surface) 0%, var(--surface-deep) 100%);
   border: 1px solid var(--accent);
